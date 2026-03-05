@@ -11,6 +11,7 @@ API_BASE = "https://api.github.com"
 UPLOAD_BASE = "https://uploads.github.com"
 TAG = "latest"
 ASSET_NAME = "podcast.mp3"
+WORLD_ASSET_NAME = "world-news.mp3"
 
 
 def _headers(token: str) -> dict[str, str]:
@@ -103,17 +104,47 @@ def _delete_existing_assets(
         logger.info(f"Deleted old asset: {asset['name']}")
 
 
-def upload_to_github_release(mp3_path: Path, github_config: dict) -> str:
-    """Upload an MP3 to a GitHub Release tagged 'latest'.
+def _upload_asset(
+    client: httpx.Client, owner: str, repo: str, release_id: int,
+    token: str, mp3_path: Path, asset_name: str,
+) -> str:
+    """Upload a single asset to the release. Returns the download URL."""
+    upload_url = (
+        f"{UPLOAD_BASE}/repos/{owner}/{repo}/releases/{release_id}/assets"
+        f"?name={asset_name}"
+    )
+    mp3_bytes = mp3_path.read_bytes()
+    size_mb = len(mp3_bytes) / (1024 * 1024)
+    logger.info(f"Uploading {asset_name} ({size_mb:.1f} MB) to GitHub Release")
 
-    Deletes any existing assets first so the release always has only today's file.
+    headers = {
+        **_headers(token),
+        "Content-Type": "application/octet-stream",
+    }
+    resp = client.post(upload_url, headers=headers, content=mp3_bytes)
+    resp.raise_for_status()
+
+    download_url = f"https://github.com/{owner}/{repo}/releases/download/{TAG}/{asset_name}"
+    logger.info(f"Uploaded to GitHub Release: {download_url}")
+    return download_url
+
+
+def upload_to_github_release(
+    mp3_path: Path,
+    github_config: dict,
+    world_mp3_path: Path | None = None,
+) -> str:
+    """Upload MP3(s) to a GitHub Release tagged 'latest'.
+
+    Deletes any existing assets first so the release always has only today's files.
 
     Args:
-        mp3_path: Path to the MP3 file.
+        mp3_path: Path to the main podcast MP3.
         github_config: Dict with keys: owner, repo, token.
+        world_mp3_path: Optional path to the world news MP3.
 
     Returns:
-        Public download URL for the uploaded asset.
+        Player page URL.
     """
     owner = github_config["owner"]
     repo = github_config["repo"]
@@ -123,24 +154,11 @@ def upload_to_github_release(mp3_path: Path, github_config: dict) -> str:
         release_id = _get_or_create_release(client, owner, repo, token)
         _delete_existing_assets(client, owner, repo, release_id, token)
 
-        # Upload the new asset
-        upload_url = (
-            f"{UPLOAD_BASE}/repos/{owner}/{repo}/releases/{release_id}/assets"
-            f"?name={ASSET_NAME}"
-        )
-        mp3_bytes = mp3_path.read_bytes()
-        size_mb = len(mp3_bytes) / (1024 * 1024)
-        logger.info(f"Uploading {ASSET_NAME} ({size_mb:.1f} MB) to GitHub Release")
+        _upload_asset(client, owner, repo, release_id, token, mp3_path, ASSET_NAME)
 
-        headers = {
-            **_headers(token),
-            "Content-Type": "application/octet-stream",
-        }
-        resp = client.post(upload_url, headers=headers, content=mp3_bytes)
-        resp.raise_for_status()
+        if world_mp3_path and world_mp3_path.exists():
+            _upload_asset(client, owner, repo, release_id, token, world_mp3_path, WORLD_ASSET_NAME)
 
         player_url = f"https://{owner}.github.io/{repo}/"
-        download_url = f"https://github.com/{owner}/{repo}/releases/download/{TAG}/{ASSET_NAME}"
-        logger.info(f"Uploaded to GitHub Release: {download_url}")
         logger.info(f"Player URL: {player_url}")
         return player_url
