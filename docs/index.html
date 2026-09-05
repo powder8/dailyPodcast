@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Podcast</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 32px;
+    text-align: center;
+  }
+  .icon { font-size: 40px; margin-bottom: 12px; }
+  h1 { font-size: 22px; color: #1a1a1a; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #666; margin-bottom: 6px; }
+  .date { font-size: 13px; color: #999; margin-bottom: 24px; }
+  audio {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+  .download {
+    display: inline-block;
+    font-size: 13px;
+    color: #0066cc;
+    text-decoration: none;
+  }
+  .download:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="card">
+    <div class="icon">&#127911;</div>
+    <h1>Daily Briefing</h1>
+    <div class="subtitle">AI, Tech, UK &amp; London &bull; with an AI Explainer</div>
+    <div class="date" id="date1"></div>
+    <audio controls preload="auto"
+      src="./podcast.mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <a class="download"
+      href="./podcast.mp3"
+      download>Download MP3</a>
+  </div>
+
+  <div class="card">
+    <div class="icon">&#127758;</div>
+    <h1>World News</h1>
+    <div class="subtitle">US &amp; International &bull; Multiple Perspectives</div>
+    <div class="date" id="date2"></div>
+    <audio controls preload="auto"
+      src="./world-news.mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <a class="download"
+      href="./world-news.mp3"
+      download>Download MP3</a>
+  </div>
+
+</div>
+<script>
+  // 2026-09-05 is replaced by the pipeline at upload time; falls back to today
+  var raw = "2026-09-05";
+  var d;
+  if (raw.indexOf("__") === 0) {
+    d = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  } else {
+    var parts = raw.split('-');
+    d = new Date(parts[0], parts[1] - 1, parts[2]).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
+  document.getElementById('date1').textContent = d;
+  document.getElementById('date2').textContent = d;
+</script>
+
+<!-- GoatCounter analytics -->
+<script data-goatcounter="https://badoo.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
