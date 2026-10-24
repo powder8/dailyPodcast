@@ -1,0 +1,429 @@
+sources:
+  # === AI / Tech (from firstProject) ===
+  hackernews:
+    type: hackernews
+    query: "AI OR LLM OR GPT OR Claude OR \"machine learning\" OR \"deep learning\""
+    min_score: 10
+    max_results: 30
+
+  arxiv:
+    type: rss
+    url: "http://export.arxiv.org/rss/cs.AI+cs.CL+cs.LG"
+    max_results: 20
+
+  reddit_machinelearning:
+    type: rss
+    url: "https://www.reddit.com/r/MachineLearning/hot/.rss"
+    max_results: 15
+
+  reddit_localllama:
+    type: rss
+    url: "https://www.reddit.com/r/LocalLLaMA/hot/.rss"
+    max_results: 15
+
+  reddit_artificial:
+    type: rss
+    url: "https://www.reddit.com/r/artificial/hot/.rss"
+    max_results: 10
+
+  techcrunch_ai:
+    type: rss
+    url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+    max_results: 15
+
+  techcrunch_venture:
+    type: rss
+    url: "https://techcrunch.com/category/venture/feed/"
+    max_results: 10
+
+  venturebeat_ai:
+    type: rss
+    url: "https://venturebeat.com/category/ai/feed/"
+    max_results: 15
+
+  simon_willison:
+    type: rss
+    url: "https://simonwillison.net/atom/everything/"
+    max_results: 10
+
+  huggingface_blog:
+    type: rss
+    url: "https://huggingface.co/blog/feed.xml"
+    max_results: 10
+
+  openai_blog:
+    type: rss
+    url: "https://openai.com/blog/rss.xml"
+    max_results: 10
+
+  lobsters_ai:
+    type: rss
+    url: "https://lobste.rs/t/ai.rss"
+    max_results: 10
+
+  mit_tech_review_ai:
+    type: rss
+    url: "https://www.technologyreview.com/topic/artificial-intelligence/feed/"
+    max_results: 15
+
+  the_verge_ai:
+    type: rss
+    url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
+    max_results: 15
+
+  wired_ai:
+    type: rss
+    url: "https://www.wired.com/feed/tag/ai/latest/rss"
+    max_results: 15
+
+  guardian_ai:
+    type: rss
+    url: "https://www.theguardian.com/technology/artificialintelligenceai/rss"
+    max_results: 15
+
+  bbc_ai:
+    type: rss
+    url: "https://feeds.bbci.co.uk/news/topics/ce1qrvleleqt/rss.xml"
+    max_results: 10
+
+  nytimes_tech:
+    type: rss
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+    max_results: 10
+
+  washington_post_tech:
+    type: rss
+    url: "https://feeds.washingtonpost.com/rss/business/technology"
+    max_results: 10
+
+  cnbc_tech:
+    type: rss
+    url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910"
+    max_results: 10
+
+  sifted_deeptech:
+    type: rss
+    url: "https://sifted.eu/sector/deeptech/feed"
+    max_results: 10
+
+  fortune:
+    type: rss
+    url: "https://fortune.com/feed/fortune-feeds/?id=3230629"
+    max_results: 10
+
+  time:
+    type: rss
+    url: "https://time.com/feed/"
+    max_results: 10
+
+  business_insider:
+    type: rss
+    url: "https://www.businessinsider.com/rss"
+    max_results: 10
+
+  telegraph_ai:
+    type: rss
+    url: "https://www.telegraph.co.uk/artificial-intelligence/rss.xml"
+    max_results: 10
+
+  forbes_ai:
+    type: rss
+    url: "https://www.forbes.com/ai/feed/"
+    max_results: 10
+
+  # Paywalled / no-RSS sites (scraped for titles)
+  ft_ai:
+    type: scraper
+    url: "https://www.ft.com/artificial-intelligence"
+    max_results: 10
+
+  wsj_ai:
+    type: scraper
+    url: "https://www.wsj.com/tech/ai"
+    max_results: 10
+
+  ap_news_ai:
+    type: scraper
+    url: "https://apnews.com/hub/artificial-intelligence"
+    max_results: 10
+
+  # Paywalled sites via Google News RSS
+  reuters_ai:
+    type: googlenews
+    domain: "reuters.com"
+    query: "artificial intelligence"
+    period: "1d"
+    max_results: 10
+
+  bloomberg_ai:
+    type: googlenews
+    domain: "bloomberg.com"
+    query: "artificial intelligence"
+    period: "1d"
+    max_results: 10
+
+  economist_ai:
+    type: googlenews
+    domain: "economist.com"
+    query: "artificial intelligence"
+    period: "7d"
+    max_results: 10
+
+  the_information_ai:
+    type: googlenews
+    domain: "theinformation.com"
+    query: "artificial intelligence"
+    period: "7d"
+    max_results: 10
+
+  # === UK / London ===
+  bbc_top:
+    type: rss
+    url: "http://feeds.bbci.co.uk/news/rss.xml"
+    max_results: 15
+
+  bbc_london:
+    type: rss
+    url: "http://feeds.bbci.co.uk/news/england/london/rss.xml"
+    max_results: 10
+
+  guardian_uk:
+    type: rss
+    url: "https://www.theguardian.com/uk-news/rss"
+    max_results: 15
+
+  guardian_london:
+    type: rss
+    url: "https://www.theguardian.com/uk/london/rss"
+    max_results: 10
+
+  telegraph_news:
+    type: rss
+    url: "https://www.telegraph.co.uk/news/rss.xml"
+    max_results: 10
+
+  sky_news:
+    type: rss
+    url: "https://feeds.skynews.com/feeds/rss/home.xml"
+    max_results: 10
+
+  evening_standard:
+    type: scraper
+    url: "https://www.standard.co.uk/news"
+    max_results: 10
+
+  # === US ===
+  nytimes_top:
+    type: rss
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+    max_results: 15
+
+  wapo_national:
+    type: rss
+    url: "https://feeds.washingtonpost.com/rss/national"
+    max_results: 10
+
+  cnn_top:
+    type: rss
+    url: "http://rss.cnn.com/rss/cnn_topstories.rss"
+    max_results: 10
+
+  npr_news:
+    type: rss
+    url: "https://feeds.npr.org/1001/rss.xml"
+    max_results: 10
+
+  ap_news:
+    type: scraper
+    url: "https://apnews.com"
+    max_results: 10
+
+  # === World / International ===
+  aljazeera:
+    type: rss
+    url: "https://www.aljazeera.com/xml/rss/all.xml"
+    max_results: 15
+
+  aljazeera_us:
+    type: rss
+    url: "https://www.aljazeera.com/xml/rss/all.xml"
+    max_results: 10
+
+  bbc_world:
+    type: rss
+    url: "http://feeds.bbci.co.uk/news/world/rss.xml"
+    max_results: 15
+
+  reuters_world:
+    type: googlenews
+    domain: "reuters.com"
+    query: "world news"
+    period: "1d"
+    max_results: 15
+
+  france24:
+    type: rss
+    url: "https://www.france24.com/en/rss"
+    max_results: 10
+
+  dw_news:
+    type: rss
+    url: "https://rss.dw.com/rdf/rss-en-all"
+    max_results: 10
+
+  japan_times:
+    type: rss
+    url: "https://www.japantimes.co.jp/feed/"
+    max_results: 10
+
+  scmp:
+    type: googlenews
+    domain: "scmp.com"
+    query: "news"
+    period: "1d"
+    max_results: 10
+
+  the_intercept:
+    type: rss
+    url: "https://theintercept.com/feed/?rss"
+    max_results: 10
+
+  propublica:
+    type: rss
+    url: "https://www.propublica.org/feeds/propublica/main"
+    max_results: 10
+
+  politico:
+    type: rss
+    url: "https://rss.politico.com/politics-news.xml"
+    max_results: 10
+
+  the_hill:
+    type: rss
+    url: "https://thehill.com/feed/"
+    max_results: 10
+
+  fox_news:
+    type: rss
+    url: "https://moxie.foxnews.com/google-publisher/politics.xml"
+    max_results: 10
+
+  breitbart:
+    type: rss
+    url: "https://feeds.feedburner.com/breitbart"
+    max_results: 10
+
+  jacobin:
+    type: rss
+    url: "https://jacobin.com/feed"
+    max_results: 10
+
+  abc_news:
+    type: rss
+    url: "https://abcnews.go.com/abcnews/topstories"
+    max_results: 10
+
+  pbs_newshour:
+    type: rss
+    url: "https://www.pbs.org/newshour/feeds/rss/headlines"
+    max_results: 10
+
+  # === Business ===
+  ft_economy:
+    type: googlenews
+    domain: "ft.com"
+    query: "UK economy OR US economy"
+    period: "1d"
+    max_results: 10
+
+  bloomberg_markets:
+    type: googlenews
+    domain: "bloomberg.com"
+    query: "markets OR economy"
+    period: "1d"
+    max_results: 10
+
+topics:
+  critical:
+    score_range: [8, 10]
+    keywords:
+      - AI foundation model releases
+      - major geopolitical events (UK, US)
+      - breaking news with wide impact
+      - major UK/US policy changes
+      - AI agents and agent frameworks
+      - major funding rounds (>$50M)
+
+  high:
+    score_range: [6, 8]
+    keywords:
+      - AI research breakthroughs / product launches
+      - UK government / parliament news
+      - US politics and policy
+      - London city news and transport
+      - major business/funding news
+      - AI regulation and policy
+      - open source model releases
+
+  moderate:
+    score_range: [4, 6]
+    keywords:
+      - general AI/ML papers and tools
+      - UK/US economic data
+      - sports, culture, environment
+      - startup news
+      - developer tools
+
+scoring:
+  model: claude-sonnet-4-5-20250929
+  min_score: 3.0
+
+digest:
+  model: claude-sonnet-4-5-20250929
+  max_stories: 150
+
+world_news_podcast:
+  model: claude-sonnet-4-5-20250929
+  max_stories: 150
+  min_score: 3.0
+  topics:
+    critical:
+      score_range: [8, 10]
+      keywords:
+        - major US political events and policy changes
+        - breaking international news with wide impact
+        - military conflicts and escalations
+        - major diplomatic developments
+        - US Supreme Court decisions
+    high:
+      score_range: [6, 8]
+      keywords:
+        - US Congress and legislation
+        - international trade and sanctions
+        - global health emergencies
+        - major elections worldwide
+        - US economic policy and indicators
+        - humanitarian crises
+        - climate and environment policy
+    moderate:
+      score_range: [4, 6]
+      keywords:
+        - regional conflicts and politics
+        - US state-level news
+        - international business
+        - global culture and society
+        - immigration and border policy
+
+tts:
+  model: tts-1-hd
+  voice: nova
+
+github:
+  owner: "powder8"
+  repo: "dailyPodcast"
+
+email:
+  from: "onboarding@resend.dev"
+  to:
+    - "powder8@gmail.com"
+  subject_prefix: "Daily Podcast"
